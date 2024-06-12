@@ -58,6 +58,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Middleware to set user in res.locals
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 // Flash messages middleware
 app.use(flash());
 
