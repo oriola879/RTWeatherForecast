@@ -9,7 +9,6 @@ const MongoStore = require('connect-mongo');
 const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
-
 const mainRoutes = require('./routes/mainRoutes');
 
 // Load environment variables
@@ -28,9 +27,17 @@ require('./config/passport')(passport);
 // Set view engine to EJS
 app.set('view engine', 'ejs');
 
-// Serve static files from the "public" directory
+
+
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    if (req.url.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+    next();
+  });
 // Use forms for PUT and DELETE requests
 app.use(methodOverride('_method'));
 
@@ -68,7 +75,6 @@ app.use((req, res, next) => {
 app.use(flash());
 
 // Define your routes here
-
 app.use('/', mainRoutes);
 
 // Start the server
