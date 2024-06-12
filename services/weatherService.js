@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const fetchWeather = async () => {
+const fetchWeather = async (location) => {
   const options = {
     method: 'GET',
     url: 'https://visual-crossing-weather.p.rapidapi.com/forecast',
@@ -8,7 +8,7 @@ const fetchWeather = async () => {
       contentType: 'csv',
       unitGroup: 'us',
       aggregateHours: '24',
-      location: 'Washington,DC,USA',
+      location: location, // Use location name
       shortColumnNames: 'false'
     },
     headers: {
@@ -20,12 +20,11 @@ const fetchWeather = async () => {
   try {
     const response = await axios.request(options);
     console.log(response.data);
-    return response.data; // Optionally return the data
+    return response.data;
   } catch (error) {
     console.error('Error fetching weather data:', error);
-    throw error; // Optionally re-throw the error
+    throw error;
   }
 };
 
-// Example usage:
-fetchWeather();
+module.exports = { fetchWeather };
