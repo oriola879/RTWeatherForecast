@@ -12,7 +12,7 @@ const fetchWeather = async () => {
       shortColumnNames: 'false'
     },
     headers: {
-      'x-rapidapi-key': '534a9a1d69msh376cc3579b2d292p1a19efjsn2f1fd96bc35d',
+      'x-rapidapi-key': 'f834301511msh6f2f801b2248d14p1cd65ejsn42529f39c82a',
       'x-rapidapi-host': 'visual-crossing-weather.p.rapidapi.com'
     }
   };

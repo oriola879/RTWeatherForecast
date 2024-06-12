@@ -41,54 +41,54 @@
   </div>
 </nav>
 
-  <section class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div class="w-75 d-flex flex-column align-items-center justify-content-center px-4 py-5 mx-auto">
-      <a href="/" class="d-flex align-items-center mb-4 fs-2 fw-semibold text-dark">
-      </a>
-      <div class="w-100 bg-white rounded-lg shadow border p-4">
-        <% if (messages && messages.errors) { %> 
-          <% messages.errors.forEach( el => { %>
-            <div class="alert alert-danger"><%= el.msg %></div>
-          <% }) %>
-        <% } %> 
-        <% if (messages && messages.info) { %> 
-          <% messages.info.forEach( el => { %>
-            <div class="alert alert-info"><%= el.msg %></div>
-          <% }) %>
-        <% } %>
-        <div class="p-4">
-          <h1 class="fs-4 fw-bold text-dark">
-            Sign in to your account
-          </h1>
-          <form class="mt-4" action="/login" method="POST">
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" name="email" id="email" class="form-control" placeholder="Type your email" required />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" name="password" id="password" placeholder="••••••••" class="form-control" required />
-            </div>
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary w-50">
-                Sign in
-              </button>
-            </div>
-          </form>
-          <form class="mt-4" action="/signup" method="GET">
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-link w-50">
-                Do not have an account? Sign up!
-              </button>
-            </div>
-          </form>
-        </div>
+<section class="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div class="w-75 d-flex flex-column align-items-center justify-content-center px-4 py-5 mx-auto">
+    <a href="/" class="d-flex align-items-center mb-4 fs-2 fw-semibold text-dark">
+    </a>
+    <div class="w-100 bg-white rounded-lg shadow border p-4">
+      <% if (messages && messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+          <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>
+      <% } %>
+      <% if (messages && messages.info) { %>
+        <% messages.info.forEach( el => { %>
+          <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %>
+      <% } %>
+      <div class="p-4">
+        <h1 class="fs-4 fw-bold text-dark">
+          Sign in to your account
+        </h1>
+        <form class="mt-4" action="/login" method="POST">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Type your email" required />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" id="password" placeholder="••••••••" class="form-control" required />
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary w-50">
+              Sign in
+            </button>
+          </div>
+        </form>
+        <form class="mt-4" action="/signup" method="GET">
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-link w-50">
+              Do not have an account? Sign up!
+            </button>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </body>
 
 </html>

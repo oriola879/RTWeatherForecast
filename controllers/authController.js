@@ -19,7 +19,10 @@ exports.postLogin = (req, res, next) => {
     validationErrors.push({ msg: "Password cannot be blank." });
 
   if (validationErrors.length) {
-    return res.status(400).json({ errors: validationErrors });
+    return res.render("login", {
+      title: "Login",
+      messages: { errors: validationErrors },
+    });
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -30,13 +33,15 @@ exports.postLogin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.status(400).json({ errors: [info] });
+      return res.render("login", {
+        title: "Login",
+        messages: { errors: [info] },
+      });
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      // Redirect the user to the main page
       return res.redirect("/");
     });
   })(req, res, next);
@@ -72,25 +77,25 @@ exports.postSignup = async (req, res, next) => {
     if (!validator.isEmail(req.body.email))
       validationErrors.push({ msg: "Please enter a valid email address." });
     if (!validator.isLength(req.body.password, { min: 8 }))
-      validationErrors.push({
-        msg: "Password must be at least 8 characters long",
-      });
+      validationErrors.push({ msg: "Password must be at least 8 characters long" });
     if (req.body.password !== req.body.confirmPassword)
       validationErrors.push({ msg: "Passwords do not match" });
 
     if (validationErrors.length) {
-      return res.status(400).json({ errors: validationErrors });
+      return res.render("signup", {
+        title: "Create Account",
+        messages: { errors: validationErrors },
+      });
     }
-    req.body.email = validator.normalizeEmail(req.body.email, {
-      gmail_remove_dots: false,
-    });
+    req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
     const existingUser = await User.findOne({
       $or: [{ email: req.body.email }, { userName: req.body.userName }],
     });
     if (existingUser) {
-      return res.status(400).json({
-        errors: [{ msg: "Account with that email address or username already exists." }],
+      return res.render("signup", {
+        title: "Create Account",
+        messages: { errors: [{ msg: "Account with that email address or username already exists." }] },
       });
     }
 
@@ -106,7 +111,7 @@ exports.postSignup = async (req, res, next) => {
       if (err) {
         return next(err);
       }
-      return res.status(201).json({ message: "Success! You are signed up and logged in." });
+      return res.redirect("/");
     });
   } catch (err) {
     return next(err);
