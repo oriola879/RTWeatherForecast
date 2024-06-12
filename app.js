@@ -77,6 +77,15 @@ app.use(flash());
 // Define your routes here
 app.use('/', mainRoutes);
 
+// Define CSS file
+app.use(express.static('views', {
+    setHeaders: (res, path, stat) => {
+        if (path.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        }
+    }
+}));
+
 // Start the server
 app.listen(process.env.PORT, () => {
     console.log('Server is running at ' + process.env.PORT);

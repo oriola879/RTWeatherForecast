@@ -1,13 +1,5 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+    color: white !important;
 }
 
