@@ -67,7 +67,9 @@ app.use(passport.session());
 
 // Flash messages middleware
 app.use(flash());
-
+app.get('/', (req, res) => {
+  res.render('index');
+});
 // Define your routes here
 app.use('/', mainRoutes);
 
