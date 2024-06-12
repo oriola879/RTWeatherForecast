@@ -10,6 +10,8 @@ const flash = require('express-flash');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const mainRoutes = require('./routes/mainRoutes');
+const weatherRoutes = require('./routes/weatherRoutes');
+const autocompleteRoutes = require('./routes/autocompleteRoutes');
 
 // Load environment variables
 require('dotenv').config({ path: './config/.env' });
@@ -27,17 +29,16 @@ require('./config/passport')(passport);
 // Set view engine to EJS
 app.set('view engine', 'ejs');
 
-
-
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
     if (req.url.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript');
+        res.setHeader('Content-Type', 'application/javascript');
     }
     next();
-  });
+});
+
 // Use forms for PUT and DELETE requests
 app.use(methodOverride('_method'));
 
@@ -73,11 +74,15 @@ app.use((req, res, next) => {
 
 // Flash messages middleware
 app.use(flash());
+
 app.get('/', (req, res) => {
-  res.render('index');
+    res.render('index');
 });
+
 // Define your routes here
 app.use('/', mainRoutes);
+app.use('/weather', weatherRoutes);
+app.use('/weather/autocomplete', autocompleteRoutes);
 
 // Define CSS file
 app.use(express.static('views', {
