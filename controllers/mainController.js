@@ -9,6 +9,9 @@ exports.getIndex = (req, res) => {
 };
 
 exports.getAccount = (req, res) => {
+  if (!req.user) {
+    return res.redirect("/login");
+  }
   res.render("account", {
     title: "Account",
   });
