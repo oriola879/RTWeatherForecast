@@ -2,14 +2,14 @@ const express = require('express');
 //const mainController = require('../controllers/mainController')
 const authController = require('../controllers/authController')
 const mainController = require('../controllers/mainController')
+const accountController = require('../controllers/accountController');
 const router = express.Router();
 
 router.get('/', mainController.getIndex)
 router.get('/account', mainController.getAccount)
-//router.get('/about', mainController.getAbout)
-//router.get('/contact', mainController.getContact)
-//router.get('/faq', mainController.getFaq)
-//router.get('/login', mainController.getLogin)
+router.post('/account/update-username', accountController.updateUsername);
+router.post('/account/update-email', accountController.updateEmail);
+router.post('/account/update-password', accountController.updatePassword);
 router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
 router.get('/signup', authController.getSignup);

@@ -74,12 +74,15 @@ exports.getSignup = (req, res) => {
 exports.postSignup = async (req, res, next) => {
   try {
     const validationErrors = [];
-    if (!validator.isEmail(req.body.email))
+    if (!validator.isEmail(req.body.email)) {
       validationErrors.push({ msg: "Please enter a valid email address." });
-    if (!validator.isLength(req.body.password, { min: 8 }))
+    }
+    if (!validator.isLength(req.body.password, { min: 8 })) {
       validationErrors.push({ msg: "Password must be at least 8 characters long" });
-    if (req.body.password !== req.body.confirmPassword)
+    }
+    if (req.body.password !== req.body.confirmPassword) {
       validationErrors.push({ msg: "Passwords do not match" });
+    }
 
     if (validationErrors.length) {
       return res.render("signup", {
@@ -114,6 +117,7 @@ exports.postSignup = async (req, res, next) => {
       return res.redirect("/");
     });
   } catch (err) {
+    console.error("Error during signup:", err); // Add this line
     return next(err);
   }
 };

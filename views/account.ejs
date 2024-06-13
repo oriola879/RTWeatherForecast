@@ -49,48 +49,55 @@
         <h1 class="fs-4 fw-bold text-dark">
           Update your account information
         </h1>
-        <form class="mt-4" action="" method="">
+
+        <% if (messages && messages.errors) { %>
+          <% messages.errors.forEach(el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+          <% }) %>
+        <% } %>
+        <% if (messages && messages.info) { %>
+          <% messages.info.forEach(el => { %>
+            <div class="alert alert-info"><%= el.msg %></div>
+          <% }) %>
+        <% } %>
+
+        <form class="mt-4" action="/account/update-username" method="POST">
           <div class="mb-3">
-            <label for="email" class="form-label">Update username</label>
+            <label for="userName" class="form-label">Update username</label>
             <input type="text" name="userName" id="userName" class="form-control" placeholder="New username" value="<%= user.userName %>" required />
           </div>
 
           <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary w-50">
-              Submit
-            </button>
+            <button type="submit" class="btn btn-primary w-50">Submit</button>
           </div>
         </form>
 
-        <form class="mt-4" action="" method="">
+        <form class="mt-4" action="/account/update-email" method="POST">
           <div class="mb-3">
             <label for="email" class="form-label">Update email</label>
             <input type="email" name="email" id="email" class="form-control" placeholder="New email" value="<%= user.email %>" required />
             <br>
-            <input type="email" name="confirm-email" id="confirm-email" class="form-control" placeholder="Confirm your new email" required />
+            <input type="email" name="confirmEmail" id="confirmEmail" class="form-control" placeholder="Confirm your new email" required />
           </div>
 
           <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary w-50">
-              Submit
-            </button>
+            <button type="submit" class="btn btn-primary w-50">Submit</button>
           </div>
         </form>
 
-        <form class="mt-4" action="" method="">
+        <form class="mt-4" action="/account/update-password" method="POST">
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" name="password" id="password" placeholder="New password" class="form-control" required />
             <br>
-            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" class="form-control" required />
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" class="form-control" required />
           </div>
-
+        
           <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary w-50">
-              Submit
-            </button>
+            <button type="submit" class="btn btn-primary w-50">Submit</button>
           </div>
         </form>
+        
       </div>
     </div>
   </div>

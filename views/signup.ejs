@@ -9,7 +9,6 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <title>Sign Up</title>
   <link rel="icon" href="icon.png" type="image/png">
-
 </head>
 
 <body>
@@ -48,12 +47,12 @@
     <a href="/" class="d-flex align-items-center mb-4 fs-2 fw-semibold text-dark"></a>
     <div class="w-100 bg-white rounded-lg shadow border p-4">
       <% if (messages && messages.errors) { %>
-        <% messages.errors.forEach( el => { %>
+        <% messages.errors.forEach(el => { %>
           <div class="alert alert-danger"><%= el.msg %></div>
         <% }) %>
       <% } %>
       <% if (messages && messages.info) { %>
-        <% messages.info.forEach( el => { %>
+        <% messages.info.forEach(el => { %>
           <div class="alert alert-info"><%= el.msg %></div>
         <% }) %>
       <% } %>
