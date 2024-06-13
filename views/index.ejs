@@ -110,7 +110,10 @@
 
     function displayWeather(data) {
         const weatherResult = document.getElementById('weatherResult');
+        const location = document.getElementById('location').value.trim();
         weatherResult.innerHTML = ''; // Clear previous results
+
+        weatherResult.innerHTML += `<h3><strong>Weather in:</strong> ${location} </h3>`;
 
         // Iterate over each day's weather data
         data.forEach(day => {
@@ -120,7 +123,7 @@
 
             const html = `
             <div class="weather-day">
-                <h2 class="mt-4">Weather on ${formattedDate}</h2>
+                <h4 class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;Weather on ${formattedDate}</h4>
                 <pre>
         <strong>Conditions:</strong> ${day.conditions}
         <strong>Temperature:</strong> ${day.temp}°C
