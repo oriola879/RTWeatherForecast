@@ -5,10 +5,10 @@ const fetchWeather = async (location) => {
     method: 'GET',
     url: 'https://visual-crossing-weather.p.rapidapi.com/forecast',
     params: {
-      contentType: 'csv',
-      unitGroup: 'us',
+      contentType: 'json',
+      unitGroup: 'metric',
       aggregateHours: '24',
-      location: location, // Use location name
+      location: location,
       shortColumnNames: 'false'
     },
     headers: {
@@ -24,6 +24,7 @@ const fetchWeather = async (location) => {
   } catch (error) {
     console.error('Error fetching weather data:', error);
     throw error;
+    console.error(error);
   }
 };
 
