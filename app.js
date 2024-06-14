@@ -12,12 +12,16 @@ const methodOverride = require('method-override');
 const mainRoutes = require('./routes/mainRoutes');
 const weatherRoutes = require('./routes/weatherRoutes');
 const autocompleteRoutes = require('./routes/autocompleteRoutes');
+const http = require('http'); // Require http module for creating server
+const socketIo = require('socket.io'); // Require socket.io for real-time communication
 
 // Load environment variables
 require('dotenv').config({ path: './config/.env' });
 
 // Initialize the app
 const app = express();
+const server = http.createServer(app); // Create an HTTP server
+const io = socketIo(server); // Create a socket.io instance attached to the server
 
 // Connect to the database
 const connectDb = require('./config/database');
@@ -93,7 +97,23 @@ app.use(express.static('views', {
     }
 }));
 
+// Socket.io connection handling
+io.on('connection', (socket) => {
+    console.log('A user connected');
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+
+    // Handle new weather data event
+    socket.on('newWeatherData', ({ location, weatherData }) => {
+        // Broadcast the weather update to all connected clients
+        io.emit('weatherUpdate', { location, weatherData });
+    });
+});
+
 // Start the server
-app.listen(process.env.PORT, () => {
-    console.log('Server is running at ' + process.env.PORT);
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Home</title>
     <link rel="icon" href="icon.png" type="image/png">
-
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
@@ -68,7 +67,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script> <!-- Include socket.io client library -->
 <script>
+    const socket = io(); // Connect to the WebSocket server
+
     document.getElementById('locationForm').addEventListener('submit', async (event) => {
         event.preventDefault(); // Prevent default form submission
 
@@ -84,6 +86,9 @@
             }
             const weatherData = await response.json();
             displayWeather(weatherData.locations[location].values);
+
+            // Emit location and weather data to server
+            socket.emit('newWeatherData', { location, weatherData });
         } catch (error) {
             console.error('Error fetching weather data:', error);
         }
@@ -126,27 +131,33 @@
             const date = new Date(day.datetime);
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = date.toLocaleDateString('en-US', options);
-
             const html = `
-            <div class="weather-day">
-                <h4 class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;Weather on ${formattedDate}</h4>
-                <pre>
-        <strong>Conditions:</strong> ${day.conditions}
-        <strong>Temperature:</strong> ${day.temp}°C
-        <strong>Max Temperature:</strong> ${day.maxt}°C
-        <strong>Min Temperature:</strong> ${day.mint}°C
-        <strong>Wind Speed:</strong> ${day.wspd} km/h
-        <strong>Cloud Cover:</strong> ${day.cloudcover}%
-        <strong>Humidity:</strong> ${day.humidity}%
-        <strong>Visibility:</strong> ${day.visibility} km
-        <strong>Chance of Precipitation:</strong> ${day.pop}%
-                </pre>
-            </div>
-            <hr>
-        `;
+                <div class="weather-day">
+                    <h4 class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;Weather on ${formattedDate}</h4>
+                    <pre>
+            <strong>Conditions:</strong> ${day.conditions}
+            <strong>Temperature:</strong> ${day.temp}°C
+            <strong>Max Temperature:</strong> ${day.maxt}°C
+            <strong>Min Temperature:</strong> ${day.mint}°C
+            <strong>Wind Speed:</strong> ${day.wspd} km/h
+            <strong>Cloud Cover:</strong> ${day.cloudcover}%
+            <strong>Humidity:</strong> ${day.humidity}%
+            <strong>Visibility:</strong> ${day.visibility} km
+            <strong>Chance of Precipitation:</strong> ${day.pop}%
+                    </pre>
+                </div>
+                <hr>
+            `;
             weatherResult.innerHTML += html;
         });
     }
+
+    // Listen for real-time updates from server
+    socket.on('weatherUpdate', (updatedWeatherData) => {
+        const location = updatedWeatherData.location;
+        const weatherData = updatedWeatherData.weatherData;
+        displayWeather(weatherData.locations[location].values);
+    });
 </script>
 </body>
 </html>
