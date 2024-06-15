@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +12,6 @@
   <link rel="icon" href="icon.png" type="image/png">
 
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
   <a class="navbar-brand" href="#"><strong>Weather Forecast / My Account</strong></a>
@@ -40,15 +38,11 @@
   </div>
 </nav>
 
-<section class="d-flex justify-content-center align-items-center vh-100 bg-light">
+<section class="d-flex justify-content-center align-items-start full-height-no-scroll" style="margin-top: 50px;">
   <div class="w-75 d-flex flex-column align-items-center justify-content-center px-4 py-5 mx-auto">
-    <a href="/" class="d-flex align-items-center mb-4 fs-2 fw-semibold text-dark">
-    </a>
     <div class="w-100 bg-white rounded-lg shadow border p-4">
       <div class="p-4">
-        <h1 class="fs-4 fw-bold text-dark">
-          Update your account information
-        </h1>
+        <h1 class="fs-4 fw-bold text-dark">Update your account information</h1>
 
         <% if (messages && messages.errors) { %>
           <% messages.errors.forEach(el => { %>
@@ -92,12 +86,12 @@
             <br>
             <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" class="form-control" required />
           </div>
-        
+
           <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary w-50">Submit</button>
           </div>
         </form>
-        
+
       </div>
     </div>
   </div>
