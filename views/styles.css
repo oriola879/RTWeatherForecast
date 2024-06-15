@@ -36,3 +36,33 @@ body {
     background-color: #e9e9e9;
 }
 
+.weather-sunny {
+    background: linear-gradient(to right, #FFD700, #FFA500);
+    color: #000;
+}
+.weather-cloudy {
+    background: linear-gradient(to right, #B0C4DE, #778899);
+    color: #fff;
+}
+.weather-rainy {
+    background: linear-gradient(to right, #1E90FF, #4682B4);
+    color: #fff;
+}
+.weather-snowy {
+    background: linear-gradient(to right, #ADD8E6, #87CEEB);
+    color: #000;
+}
+.weather-stormy {
+    background: linear-gradient(to right, #4F4F4F, #708090);
+    color: #fff;
+}
+.weather-default {
+    background: linear-gradient(to right, #F0E68C, #FFD700);
+    color: #000;
+}
+
+.weather-icon {
+    color: #fff;
+    font-size: 50px;
+}
+
