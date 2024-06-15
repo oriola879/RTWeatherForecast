@@ -62,7 +62,6 @@ exports.updatePassword = async (req, res) => {
     try {
       const { password, confirmPassword } = req.body;
       
-      // Debugging: Check if password and confirmPassword are received
       console.log('Password:', password);
       console.log('Confirm Password:', confirmPassword);
   
@@ -74,10 +73,8 @@ exports.updatePassword = async (req, res) => {
   
       const hashedPassword = await bcrypt.hash(password, 10);
   
-      // Debugging: Check the hashed password before saving
       console.log('Hashed Password:', hashedPassword);
   
-      // Ensure req.user is properly populated
       console.log('User:', req.user);
       if (!req.user) {
         return res.render('account', {
@@ -92,7 +89,6 @@ exports.updatePassword = async (req, res) => {
     } catch (err) {
       console.error('Error updating password:', err);
   
-      // Debugging: Output error message
       res.render('account', {
         messages: { errors: [{ msg: 'Error updating password' }] },
       });

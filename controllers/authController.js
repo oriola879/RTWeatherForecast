@@ -117,7 +117,7 @@ exports.postSignup = async (req, res, next) => {
       return res.redirect("/");
     });
   } catch (err) {
-    console.error("Error during signup:", err); // Add this line
+    console.error("Error during signup:", err); 
     return next(err);
   }
 };
