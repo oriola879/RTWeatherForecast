@@ -8,7 +8,7 @@ const initializePassport = require('../config/passport');
 
 describe('Passport LocalStrategy', () => {
   beforeAll(async () => {
-    await mongoose.connect('mongodb://localhost:27017/testdb', {
+    await mongoose.connect('mongodb://localhost:27017/testdb', { //change this db to fit the correct one, dont forget about .env.test
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
