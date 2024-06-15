@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Home</title>
@@ -118,6 +119,23 @@
         }
     });
 
+    function getWeatherIcon(condition) {
+        const conditionLower = condition.toLowerCase();
+        if (conditionLower.includes('sunny') || conditionLower.includes('clear')) {
+            return '<i class="fas fa-sun" style="color: #FFD700;"></i>';
+        } else if (conditionLower.includes('cloud')) {
+            return '<i class="fas fa-cloud" style="color: #B0C4DE;"></i>';
+        } else if (conditionLower.includes('rain')) {
+            return '<i class="fas fa-cloud-showers-heavy" style="color: #1E90FF;"></i>';
+        } else if (conditionLower.includes('snow')) {
+            return '<i class="fas fa-snowflake" style="color: #ADD8E6;"></i>';
+        } else if (conditionLower.includes('storm')) {
+            return '<i class="fas fa-bolt" style="color: #A52A2A;"></i>';
+        } else {
+            return '<i class="fas fa-cloud-sun" style="color: #F0E68C;"></i>'; // default icon
+        }
+    }
+
     function displayWeather(data) {
         const weatherResult = document.getElementById('weatherResult');
         const location = document.getElementById('location').value.trim();
@@ -130,9 +148,10 @@
             const date = new Date(day.datetime);
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = date.toLocaleDateString('en-US', options);
+            const weatherIcon = getWeatherIcon(day.conditions); // Get the weather icon HTML
             const html = `
                 <div class="weather-day">
-                    <h4 class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;Weather on ${formattedDate}</h4>
+                    <h4 class="mt-4">${weatherIcon}&nbsp;&nbsp;&nbsp;&nbsp;Weather on ${formattedDate}</h4>
                     <pre>
             <strong>Conditions:</strong> ${day.conditions}
             <strong>Temperature:</strong> ${day.temp}°C
