@@ -13,8 +13,8 @@ body {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Change this if you need different alignment */
-    background-color: #f8f9fa; /* Example background color */
+    align-items: flex-start;
+    background-color: #f8f9fa;
     overflow: auto;
 }
 

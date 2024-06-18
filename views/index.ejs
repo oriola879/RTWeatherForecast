@@ -58,10 +58,10 @@
                 <form id="locationForm" class="mt-4" action="" method="GET">
                     <label for="location">Location:</label>
                     <input type="text" id="location" name="location" placeholder="Search location..." class="form-control" required>
-                    <div id="autocompleteResults" class="autocomplete-results"></div> <!-- Container for autocomplete suggestions -->
+                    <div id="autocompleteResults" class="autocomplete-results"></div>
                     <button type="submit" class="btn btn-primary mt-2">Get Weather</button>
                 </form>
-                <div id="weatherResult" class="mt-4 row"></div> <!-- Container for weather cards (row for Bootstrap grid) -->
+                <div id="weatherResult" class="mt-4 row"></div>
             </div>
         </div>
     </div>
@@ -134,7 +134,7 @@
         } else if (conditionLower.includes('storm')) {
             return '<i class="fa-solid fa-bolt weather-icon"></i>';
         } else {
-            return '<i class="fas fa-cloud-sun weather-icon" ></i>'; // default icon
+            return '<i class="fas fa-cloud-sun weather-icon" ></i>';
         }
     }
 
@@ -142,7 +142,6 @@
         const weatherResult = document.getElementById('weatherResult');
         weatherResult.innerHTML = '';
 
-        // Iterate over each day's weather data, except the last one
         for (let i = 0; i < data.length - 1; i++) {
             const day = data[i];
 
